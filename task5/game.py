@@ -3,23 +3,34 @@ RPG game
 """
 
 class Room:
-    pass
+    """
+    Allow user to generate a room
+    """
 
 
 class Character:
-    pass
+    """
+    Allows user to create a character
+    """
 
 
-class Enemy:
-    pass
+class Enemy(Character):
+    """
+    Create an enemy based on a character attributes
+    """
 
 
-class Ally:
-    pass
+class Ally(Character):
+    """
+    Create an enemy based on a character attributes
+    """
 
 
 class Item:
-    pass
+    """
+    Create a usable item
+    """
+
 
 
 if __name__ == "__main__":
