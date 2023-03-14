@@ -32,7 +32,7 @@ book = game.Item("book")
 book.set_description("A really good book entitled 'Knitting for dummies'")
 dining_hall.set_item(book)
 
-current_room = kitchen
+current_room = dining_hall
 backpack = []
 
 dead = False
