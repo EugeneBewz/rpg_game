@@ -144,60 +144,61 @@ while alive:
         if hostile_npc_here:
             if speak_with == hostile_npc_here.npc_name:
                 hostile_npc_here.talk()
-        elif speak_with == bargainer.npc_name:
-            bargainer.talk()
-            response_for_trade = input("(y/n) >>> ")
-            if response_for_trade == 'y':
-                if bargainer.bargain(mc_renown) == 0:
-                    print("I will give a souvenir for 3 items. Agree?")
-                    offer_response = input("(y/n) >>> ")
-                    if offer_response == 'y':
-                        if len(mc_backpack) == 3:
-                            mc_backpack.pop()
-                            mc_backpack.pop()
-                            mc_backpack.pop()
-                            mc_backpack.append(souvenir)
+        if friendly_npc_here:
+            if speak_with == bargainer.npc_name:
+                bargainer.talk()
+                response_for_trade = input("(y/n) >>> ")
+                if response_for_trade == 'y':
+                    if bargainer.bargain(mc_renown) == 0:
+                        print("I will give a souvenir for 3 items. Agree?")
+                        offer_response = input("(y/n) >>> ")
+                        if offer_response == 'y':
+                            if len(mc_backpack) == 3:
+                                mc_backpack.pop()
+                                mc_backpack.pop()
+                                mc_backpack.pop()
+                                mc_backpack.append(souvenir)
+                            else:
+                                print("Sorry, but not enough...")
                         else:
-                            print("Sorry, but not enough...")
-                    else:
-                        print("Then next time")
-                elif bargainer.bargain(mc_renown) == 1:
-                    print("I will give a souvenir for 2 items. Agree?")
-                    offer_response = input("(y/n) >>> ")
-                    if offer_response == 'y':
-                        if len(mc_backpack) >= 2:
-                            mc_backpack.pop()
-                            mc_backpack.pop()
-                            mc_backpack.append(souvenir)
+                            print("Then next time")
+                    elif bargainer.bargain(mc_renown) == 1:
+                        print("I will give a souvenir for 2 items. Agree?")
+                        offer_response = input("(y/n) >>> ")
+                        if offer_response == 'y':
+                            if len(mc_backpack) >= 2:
+                                mc_backpack.pop()
+                                mc_backpack.pop()
+                                mc_backpack.append(souvenir)
+                            else:
+                                print("Sorry, but not enough...")
                         else:
-                            print("Sorry, but not enough...")
-                    else:
-                        print("Then next time")
-                elif bargainer.bargain(mc_renown) == 2:
-                    print("I will give a souvenir for 1 items. Agree?")
-                    offer_response = input("(y/n) >>> ")
-                    if offer_response == 'y':
-                        if len(mc_backpack) >= 1:
-                            mc_backpack.pop()
-                            mc_backpack.append(souvenir)
+                            print("Then next time")
+                    elif bargainer.bargain(mc_renown) == 2:
+                        print("I will give a souvenir for 1 items. Agree?")
+                        offer_response = input("(y/n) >>> ")
+                        if offer_response == 'y':
+                            if len(mc_backpack) >= 1:
+                                mc_backpack.pop()
+                                mc_backpack.append(souvenir)
+                            else:
+                                print("Sorry, but not enough...")
                         else:
-                            print("Sorry, but not enough...")
-                    else:
-                        print("Then next time")
-                elif bargainer.bargain(mc_renown) == 3:
-                    print("Take this souvenir, but don't beat me!")
-                    mc_backpack.append(souvenir)
-            elif response_for_trade == 'n':
-                print("Then see you later")
-        elif friendly_npc_here:
-            if speak_with == friendly_npc_here.npc_name:
-                friendly_npc_here.talk()
-                if friendly_npc_here.give_buff() == 0:
-                    print("They can give no buff...")
-                elif friendly_npc_here.give_buff() == 1:
-                    print(f"You received an item - [{friendly_npc_here.npc_equipment.item_name}]")
-                    mc_backpack.append(friendly_npc_here.npc_equipment)
-                    friendly_npc_here.set_npc_equipment(None)
+                            print("Then next time")
+                    elif bargainer.bargain(mc_renown) == 3:
+                        print("Take this souvenir, but don't beat me!")
+                        mc_backpack.append(souvenir)
+                elif response_for_trade == 'n':
+                    print("Then see you later")
+            else:
+                if speak_with == friendly_npc_here.npc_name:
+                    friendly_npc_here.talk()
+                    if friendly_npc_here.give_buff() == 0:
+                        print("They can give no buff...")
+                    elif friendly_npc_here.give_buff() == 1:
+                        print(f"You received an item - [{friendly_npc_here.npc_equipment.item_name}]")
+                        mc_backpack.append(friendly_npc_here.npc_equipment)
+                        friendly_npc_here.set_npc_equipment(None)
     # Try to fight with NPC
     elif command == "fight":
         if hostile_npc_here or friendly_npc_here:
